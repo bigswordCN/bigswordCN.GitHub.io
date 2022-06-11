@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://bigswordCN.GitHub.io</id>
+    <title>Oolong</title>
+    <updated>2022-06-11T13:21:10.745Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://bigswordCN.GitHub.io"/>
+    <link rel="self" href="https://bigswordCN.GitHub.io/atom.xml"/>
+    <subtitle>多喝水</subtitle>
+    <logo>https://bigswordCN.GitHub.io/images/avatar.png</logo>
+    <icon>https://bigswordCN.GitHub.io/favicon.ico</icon>
+    <rights>All rights reserved 2022, Oolong</rights>
+    <entry>
+        <title type="html"><![CDATA[安装Docker可视化图形工具Portainer]]></title>
+        <id>https://bigswordCN.GitHub.io/post/docker-portainer/</id>
+        <link href="https://bigswordCN.GitHub.io/post/docker-portainer/">
+        </link>
+        <updated>2022-06-11T07:27:02.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="安装portainer">安装portainer</h2>
+<pre><code class="language-shell">docker run -d -p 8000:8000 -p 9000:9000 --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    portainer/portainer-ce:latest
+</code></pre>
+<p><code>-v</code>参数表示创建映射目录，位于默认映射位置，方便重新拉取镜像后升级。</p>
+]]></content>
+    </entry>
+</feed>
