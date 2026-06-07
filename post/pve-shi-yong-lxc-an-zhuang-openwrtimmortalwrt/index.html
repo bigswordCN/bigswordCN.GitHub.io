@@ -1,0 +1,281 @@
+<html>
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content="Gridea Pro 1.2.2">
+<title>PVE 使用 LXC 安装 OpenWrt/ImmortalWrt | Gridea Pro</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1780808951">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="PVE 使用 LXC 安装 OpenWrt/ImmortalWrt | Gridea Pro - Atom Feed" href="/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="OpenWrt" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+<meta name="description" content="PVE CT 模板中下载 OpenWrt 或者 ImmortalWrt 地址 https://downloads.immortalwrt.org/releases/25.12.0/targets/x86/64/immortalwrt-25.12.0-x86-64-rootfs.tar.gz LXC 选择 rootfs.tar.gz 格式，其他是给虚拟机使用。 | 格式 | 用途 | |&amp;hellip;">
+<link rel="canonical" href="https://bigswordcn.github.io/post/pve-shi-yong-lxc-an-zhuang-openwrtimmortalwrt/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"PVE 使用 LXC 安装 OpenWrt/ImmortalWrt","url":"https://bigswordcn.github.io/post/pve-shi-yong-lxc-an-zhuang-openwrtimmortalwrt/","description":"PVE CT 模板中下载 OpenWrt 或者 ImmortalWrt 地址 https://downloads.immortalwrt.org/releases/25.12.0/targets/x86/64/immortalwrt-25.12.0-x86-64-rootfs.tar.gz LXC 选择 rootfs.tar.gz 格式，其他是给虚拟机使用。 | 格式 | 用途 | |\u0026hellip;","datePublished":"2026-06-07T13:07:23+08:00","dateModified":"2026-06-07T13:07:23+08:00","author":{"@type":"Person","name":"Gridea Pro"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Gridea Pro"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://bigswordcn.github.io","name":"Gridea Pro","position":1},{"@type":"ListItem","item":"https://bigswordcn.github.io/post/pve-shi-yong-lxc-an-zhuang-openwrtimmortalwrt/","name":"PVE 使用 LXC 安装 OpenWrt/ImmortalWrt","position":2}]}</script>
+<meta property="og:title" content="PVE 使用 LXC 安装 OpenWrt/ImmortalWrt">
+<meta property="og:description" content="PVE CT 模板中下载 OpenWrt 或者 ImmortalWrt 地址 https://downloads.immortalwrt.org/releases/25.12.0/targets/x86/64/immortalwrt-25.12.0-x86-64-rootfs.tar.gz LXC 选择 rootfs.tar.gz 格式，其他是给虚拟机使用。 | 格式 | 用途 | |&amp;hellip;">
+<meta property="og:url" content="https://bigswordcn.github.io/post/pve-shi-yong-lxc-an-zhuang-openwrtimmortalwrt/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Gridea Pro">
+<meta property="og:image" content="/images/avatar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://bigswordcn.github.io/post/pve-shi-yong-lxc-an-zhuang-openwrtimmortalwrt/">
+<meta name="twitter:title" content="PVE 使用 LXC 安装 OpenWrt/ImmortalWrt">
+<meta name="twitter:description" content="PVE CT 模板中下载 OpenWrt 或者 ImmortalWrt 地址 https://downloads.immortalwrt.org/releases/25.12.0/targets/x86/64/immortalwrt-25.12.0-x86-64-rootfs.tar.gz LXC 选择 rootfs.tar.gz 格式，其他是给虚拟机使用。 | 格式 | 用途 | |&amp;hellip;">
+<meta name="twitter:image" content="/images/avatar.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Gridea Pro">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icons/icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192x192.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/images/icons/icon-192x192.png">
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}</script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="main-content">
+            
+<div class="site-header">
+    <a href="/">
+        <img class="avatar" src="/images/avatar.png?v=1780808951" alt="">
+    </a>
+    <h1 class="site-title">
+        Gridea Pro
+    </h1>
+    <p class="site-description">
+        Welcome to Gridea Pro
+    </p>
+    <div class="menu-container">
+        
+        
+        <a href="/" class="menu">
+            首页
+        </a>
+        
+        
+        
+        <a href="/post" class="menu">
+            博客
+        </a>
+        
+        
+        
+        <a href="/memos" class="menu">
+            闪念
+        </a>
+        
+        
+        
+        <a href="/archives" class="menu">
+            归档
+        </a>
+        
+        
+        
+        <a href="/tags" class="menu">
+            标签
+        </a>
+        
+        
+        
+        <a href="/links" class="menu">
+            友链
+        </a>
+        
+        
+        
+        <a href="/post/about" class="menu">
+            关于
+        </a>
+        
+        
+    </div>
+    <div class="social-container">
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+            <div class="post-detail">
+                <article class="post">
+                    <h2 class="post-title">
+                        PVE 使用 LXC 安装 OpenWrt/ImmortalWrt
+                    </h2>
+                    <div class="post-info">
+                        <span>
+                            2026-06-07
+                        </span>
+                        <span>
+                            2 分钟阅读
+                        </span>
+                        
+                        <a href="/tag/openwrt/" class="post-tag">
+                            # OpenWrt
+                        </a>
+                        
+                    </div>
+                    
+                    <div class="post-content-wrapper">
+                        <div class="post-content" v-pre>
+                            <p>PVE CT 模板中下载 OpenWrt 或者 ImmortalWrt 地址 <a href="https://downloads.immortalwrt.org/releases/25.12.0/targets/x86/64/immortalwrt-25.12.0-x86-64-rootfs.tar.gz">https://downloads.immortalwrt.org/releases/25.12.0/targets/x86/64/immortalwrt-25.12.0-x86-64-rootfs.tar.gz</a></p>
+<p>LXC 选择 <strong>rootfs.tar.gz</strong> 格式，其他是给虚拟机使用。</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qcow2</td>
+<td>KVM/QEMU</td>
+</tr>
+<tr>
+<td>vmdk</td>
+<td>VMware</td>
+</tr>
+<tr>
+<td>vhdx</td>
+<td>Hyper-V</td>
+</tr>
+<tr>
+<td>vdi</td>
+<td>VirtualBox</td>
+</tr>
+<tr>
+<td>iso</td>
+<td>光盘安装镜像</td>
+</tr>
+</tbody>
+</table>
+<p>下载完成后在PVE主机中输入下方命令创建LXC</p>
+<pre><code class="language-bash"># LXC ImmortalWrt
+pct create 101 \
+/var/lib/vz/template/cache/immortalwrt-25.12.0-x86-64-rootfs.tar.gz \
+--arch amd64 \
+--hostname ImmortalWrt \
+--rootfs local-lvm:8 \
+--memory 1024 \
+--cores 4 \
+--ostype unmanaged \
+--unprivileged 0 \
+--net0 name=eth0,bridge=vmbr0
+
+pct set 101 -features nesting=1,keyctl=1,fuse=1
+
+# tun模式需要添加这个参数
+vim /etc/pve/lxc/101.conf
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+
+# 修改网络信息
+vim /etc/config/network;
+
+service network restart;
+
+# 参考
+config interface 'lan'
+        option device 'eth0'
+        option proto 'static'
+        option ipaddr '192.168.1.88'
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+        option gateway '192.168.1.1'
+        list dns '180.184.1.1'
+        list dns '1.2.4.8'
+# 修改 DHCP 选项
+3,192.168.1.88
+6,192.168.1.88
+
+apk add luci-mod-dashboard 仪表盘
+</code></pre>
+<p>创建完成后IP地址不会非期望值，需要在 vim /etc/config/network 中再次修改IP地址；<br />
+可以访问或者ping IP但是无法ping 域名，DNS配置有误<br />
+调整日志级别：系统-日志-日志记录级别-警告 以降低CPU使用率。</p>
+
+                        </div>
+                        <div class="toc-container">
+                            
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            
+
+            
+
+            
+<div class="site-footer">
+    Powered by Gridea Pro
+    <a class="rss" href="/atom.xml" target="_blank">
+        <i class="ri-rss-line"></i> RSS
+    </a>
+</div>
+
+        </div>
+    </div>
+
+    <script>
+        hljs.initHighlightingOnLoad()
+
+        let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+        
+        
+        
+        
+        
+        
+        
+        
+
+        window.addEventListener("scroll", event => {
+            let fromTop = window.scrollY;
+
+            mainNavLinks.forEach((link, index) => {
+                let section = document.getElementById(decodeURI(link.hash).substring(1));
+                let nextSection = null
+                if (mainNavLinks[index + 1]) {
+                    nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+                }
+                if (section.offsetTop <= fromTop) {
+                    if (nextSection) {
+                        if (nextSection.offsetTop > fromTop) {
+                            link.classList.add("current");
+                        } else {
+                            link.classList.remove("current");
+                        }
+                    } else {
+                        link.classList.add("current");
+                    }
+                } else {
+                    link.classList.remove("current");
+                }
+            });
+        });
+
+    </script>
+<script>console.log("\n%c ✦ Gridea Pro v1.2.2 %c · Theme: inotes v1.0.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</body>
+
+</html>
