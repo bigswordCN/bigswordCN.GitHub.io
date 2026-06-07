@@ -1,7 +1,8 @@
 {
   "id": "/",
-  "name": "Gridea Pro",
-  "short_name": "Gridea Pro",
+  "name": "Oolong",
+  "short_name": "Oolong",
+  "lang": "zh-cn",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
